@@ -22,17 +22,18 @@ public class MenuBook : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		// Manually go to page 1.
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
 			currentOpenPage = 1;
-			Debug.Log ("Open that shit up!");
 		}
+		// Manually close book.
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			currentOpenPage = 0;
-			Debug.Log ("Close it down.");
 		}
 
+		// Tell the book's pieces animators to reflect the current page to go to.
 		switch(currentOpenPage)
 		{
 			case 0:
