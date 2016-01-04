@@ -3,11 +3,11 @@ using System.Collections;
 
 public class RollDice : Button {
 	void Start () {
-		dice = GetComponent<Dice>();
+		dice = GetComponent<MyDice>();
 		action = delegate(Button b) {
 			dice.Roll();
 		};
 	}
 
-	private Dice dice;
+	private MyDice dice;
 }

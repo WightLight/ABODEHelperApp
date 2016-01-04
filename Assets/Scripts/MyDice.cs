@@ -9,7 +9,7 @@ using System.Collections;
  *  the numerical value from rotation.  This is a complex operation, so we
  *  cache the result and reset the cache every time the die is rolled.
  *  ***************************************************************************/
-abstract public class Dice : MonoBehaviour {
+abstract public class MyDice : MonoBehaviour {
 	public const float VERTICAL_ROLL_FACTOR = 2;
 
 	public float maxRollForce = 100;

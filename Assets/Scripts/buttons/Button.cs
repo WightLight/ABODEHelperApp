@@ -21,15 +21,50 @@ public delegate void ButtonAction(Button b);
  *  a result of the callback.
  *  ***************************************************************************/
 public class Button : MonoBehaviour {
-    public bool active;
+    public bool active = true;
 
-/*  Unity API
- *  ==========================================================================*/
-	void Update() {
-	    if(active && Input.GetMouseButtonDown(0))
-	        action(this);
+/**
+ *  Safe accessor for active state.
+ */
+	public bool Active {
+		get {  return active; }
 	}
-	
+
+/*  Public Members
+ *  ==========================================================================*/
+/**
+ *  Presses the button if it is able to be pressed.
+ *  @param force Specify whether to force the button to be pressed.
+ */
+	public void Press(bool force = false) {
+		if(active && !force)
+			action(this);
+	}
+
+/**
+ *  Activate the button.  Can be overridden if other side effects should be manifest.
+ */
+	public void Activate() {
+		active = true;
+	}
+
+/**
+ *  Deactivate the button.  Can be overridden if other side effects should be manifest.
+ */
+	public void Deactivate() {
+		active = false;
+	}
+
+/**
+ *  Toggle the active state.  Activate if inactive, deactivate if active.
+ */
+	public void Toggle() {
+		if(active)
+			Deactivate();
+		else
+			Activate ();
+	}
+
 /*  Private Members
  *  ==========================================================================*/
     protected ButtonAction action;
