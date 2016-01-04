@@ -37,7 +37,7 @@ public class Button : MonoBehaviour {
  *  @param force Specify whether to force the button to be pressed.
  */
 	public void Press(bool force = false) {
-		if(active && !force)
+		if(active || force)
 			action(this);
 	}
 
