@@ -18,7 +18,7 @@ public class RollDice : Button {
 		};
 	}
 	
-	private void Roll() {
+    public void Roll() {
 	    if(!Rolling) {
 			rb.AddForce(new Vector3(Random.Range(-maxRollForce, maxRollForce), VERTICAL_ROLL_FACTOR * maxRollForce, Random.Range(-maxRollForce, maxRollForce)));
 			rb.AddTorque(new Vector3(Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce)));
