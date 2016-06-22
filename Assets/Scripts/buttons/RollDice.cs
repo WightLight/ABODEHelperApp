@@ -7,10 +7,7 @@ public class RollDice : Button {
 	public float maxRollForce = 100;
     
     public bool Rolling {
-		get {
-			// return !rb.IsSleeping();
-			return false;
-		}
+		get {  return !rb.IsSleeping(); }
 	}
     
 	void Start () {
@@ -22,10 +19,10 @@ public class RollDice : Button {
 	}
 	
     public void Roll() {
-	    if(!Rolling) {
+	 //   if(!Rolling) {
 			rb.AddForce(new Vector3(Random.Range(-maxRollForce, maxRollForce), VERTICAL_ROLL_FACTOR * maxRollForce, Random.Range(-maxRollForce, maxRollForce)));
 			rb.AddTorque(new Vector3(Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce)));
-		}
+	//	}
 	}
 
 	//private MyDice dice;
