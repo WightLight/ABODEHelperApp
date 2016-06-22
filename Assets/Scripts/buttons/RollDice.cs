@@ -7,7 +7,10 @@ public class RollDice : Button {
 	public float maxRollForce = 100;
     
     public bool Rolling {
-		get {  return !rb.IsSleeping(); }
+		get {
+			// return !rb.IsSleeping();
+			return false;
+		}
 	}
     
 	void Start () {
