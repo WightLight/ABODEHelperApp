@@ -30,6 +30,18 @@ public class Button : MonoBehaviour {
 		get {  return active; }
 	}
 
+	public bool HasAction {
+		get {  return action != null; }
+	}
+
+	public bool HasRelease {
+		get {  return release != null; }
+	}
+
+	public bool HasLongPress {
+		get {  return longPress != null; }
+	}
+
 /*  Public Members
  *  ==========================================================================*/
 /**
@@ -37,8 +49,26 @@ public class Button : MonoBehaviour {
  *  @param force Specify whether to force the button to be pressed.
  */
 	public void Press(bool force = false) {
-		if(active || force)
+		if(HasAction && (active || force))
 			action(this);
+	}
+
+/**
+ *  Releases the button if it is able to be released
+ *  @param force Specify whether to force the button to be released.
+ */
+	public void Release(bool force = false) {
+		if(HasRelease && (active || force))
+			release(this);
+	}
+
+/**
+ *  When the button is pressed and held for a bit, this triggers
+ *  @param force Specify whether to force the button to be long pressed
+ */
+	public void LongPress(bool force = false) {
+		if(HasLongPress && (active || force))
+			longPress(this);
 	}
 
 /**
@@ -68,4 +98,6 @@ public class Button : MonoBehaviour {
 /*  Private Members
  *  ==========================================================================*/
     protected ButtonAction action;
+	protected ButtonAction release;
+	protected ButtonAction longPress;
 }

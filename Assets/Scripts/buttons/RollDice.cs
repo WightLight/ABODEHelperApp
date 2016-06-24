@@ -13,8 +13,11 @@ public class RollDice : Button {
 	void Start () {
 		//dice = GetComponent<MyDice>();
 		rb = GetComponent<Rigidbody>();
-		action = delegate(Button b) {
+		release = delegate(Button b) {
 			Roll();
+		};
+		longPress = delegate(Button b) {
+			Debug.Log("SHOW MENU!");
 		};
 	}
 	
