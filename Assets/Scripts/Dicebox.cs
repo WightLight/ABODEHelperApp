@@ -32,6 +32,7 @@ public class Dicebox : MonoBehaviour
 		if(Dice.Count < Dice.Capacity) {
 			GameObject newDie = Instantiate(D10Prefab, DieSpawnPoint.position, DieSpawnPoint.rotation) as GameObject;
 			newDie.transform.parent = DieSpawnPoint;
+            newDie.GetComponent<RollDice>().camera = (Lookpointer) FindObjectOfType(typeof(Lookpointer));
 			Dice.Add(newDie);
 		}
     }

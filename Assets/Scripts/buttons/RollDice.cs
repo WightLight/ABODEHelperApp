@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class RollDice : Button {
+    public Lookpointer camera;
+
 	public const float VERTICAL_ROLL_FACTOR = 2;
 
 	public float maxRollForce = 100;
@@ -17,7 +19,7 @@ public class RollDice : Button {
 			Roll();
 		};
 		longPress = delegate(Button b) {
-			Debug.Log("SHOW MENU!");
+            camera.FlyTo(1);
 		};
 	}
 	
