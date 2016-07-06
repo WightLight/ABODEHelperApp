@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RollDice : Button {
-    public Lookpointer camera;
+	public Lookpoint editMenuPoint;
 
 	public const float VERTICAL_ROLL_FACTOR = 2;
 
@@ -19,7 +19,7 @@ public class RollDice : Button {
 			Roll();
 		};
 		longPress = delegate(Button b) {
-            camera.FlyTo(1);
+			editMenuPoint.FlyTo();
 		};
 	}
 	

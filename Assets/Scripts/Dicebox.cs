@@ -9,6 +9,8 @@ public class Dicebox : MonoBehaviour
     public GameObject D10Prefab;
 	public GameObject[] initialDice;
 
+	public Lookpoint editMenuPoint;
+
 	public BoundedList<GameObject> Dice;
 
 /*  Unity API
@@ -32,7 +34,8 @@ public class Dicebox : MonoBehaviour
 		if(Dice.Count < Dice.Capacity) {
 			GameObject newDie = Instantiate(D10Prefab, DieSpawnPoint.position, DieSpawnPoint.rotation) as GameObject;
 			newDie.transform.parent = DieSpawnPoint;
-            newDie.GetComponent<RollDice>().camera = (Lookpointer) FindObjectOfType(typeof(Lookpointer));
+			newDie.GetComponent<RollDice>().editMenuPoint = editMenuPoint;
+        //  newDie.GetComponent<RollDice>().camera = (Lookpointer) FindObjectOfType(typeof(Lookpointer));
 			Dice.Add(newDie);
 		}
     }
