@@ -6,7 +6,7 @@ using System.Collections;
  *  we check to see if the object is a button.  If so, we click it.
  *  ***************************************************************************/
 public class ButtonManager : MonoBehaviour {
-	public const float longPressThreshold = 1.5f; // in seconds (?)
+	public const float longPressThreshold = 0.5f; // in seconds (?)
 
 	public Camera cam;
 	

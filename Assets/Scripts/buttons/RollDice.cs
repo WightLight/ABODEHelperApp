@@ -19,7 +19,7 @@ public class RollDice : Button {
 			Roll();
 		};
 		longPress = delegate(Button b) {
-			editMenuPoint.FlyTo();
+			editMenuPoint.FlyTo(500);
 		};
 	}
 	
