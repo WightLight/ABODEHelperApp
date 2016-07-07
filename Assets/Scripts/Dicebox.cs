@@ -10,6 +10,7 @@ public class Dicebox : MonoBehaviour
 	public GameObject[] initialDice;
 
     public float editTransitionTime = 500.0f;
+    public Lookpoint diceboxLookpoint;
 	public Lookpoint editMenuPoint;
     public Waypoint dieFloatPoint;
 
@@ -54,14 +55,23 @@ public class Dicebox : MonoBehaviour
     }
 
     public void EditDie(RollDice die) {
-        inEditMode = true;
-        dieBeingEdited = die;
-
         editMenuPoint.Look(editTransitionTime);
-        dieFloatPoint.FlyTo(die.gameObject, editTransitionTime);
         die.GetComponent<Rigidbody>().useGravity = false;
         die.GetComponent<Collider>().enabled = false;
         die.Deactivate();
+
+        dieFloatPoint.FlyTo(die.gameObject, editTransitionTime, delegate(GameObject obj) {
+            inEditMode = true;
+            dieBeingEdited = die;
+        });
+    }
+
+    public void CancelEditDie() {
+        FinishEditDie();
+    }
+
+    public void SubmitEditDie() {
+
     }
 
 /*  Private Members
@@ -76,4 +86,15 @@ public class Dicebox : MonoBehaviour
 		foreach(GameObject die in initialDice)
 			Dice.Add(die);
 	}
+
+    private void FinishEditDie() {
+        diceboxLookpoint.Look(editTransitionTime);
+        inEditMode = false;
+
+        DieSpawnPoint.GetComponent<Waypoint>().FlyTo(dieBeingEdited.gameObject, editTransitionTime, delegate(GameObject obj) {
+            dieBeingEdited.GetComponent<Rigidbody>().useGravity = true;
+            dieBeingEdited.GetComponent<Collider>().enabled = true;
+            dieBeingEdited.Activate();
+        });
+    }
 }
