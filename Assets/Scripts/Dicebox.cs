@@ -59,25 +59,34 @@ public class Dicebox : MonoBehaviour
         die.GetComponent<Rigidbody>().useGravity = false;
         die.GetComponent<Collider>().enabled = false;
         die.Deactivate();
+        dieBeingEdited = die;
+
+        diePreEditProperties = new DieProperties();
+        diePreEditProperties.material = die.GetComponent<Renderer>().material;
 
         dieFloatPoint.FlyTo(die.gameObject, editTransitionTime, delegate(GameObject obj) {
             inEditMode = true;
-            dieBeingEdited = die;
         });
     }
 
     public void CancelEditDie() {
+        RevertEditedDie();
         FinishEditDie();
     }
 
     public void SubmitEditDie() {
+        FinishEditDie();
+    }
 
+    public void ChangeDieMaterial(Material material) {
+        dieBeingEdited.GetComponent<Renderer>().material = material;
     }
 
 /*  Private Members
  *  ==========================================================================*/
     private bool inEditMode;
     private RollDice dieBeingEdited;
+    private DieProperties diePreEditProperties;
 
 /*  Private Methods
  *  ==========================================================================*/
@@ -86,6 +95,10 @@ public class Dicebox : MonoBehaviour
 		foreach(GameObject die in initialDice)
 			Dice.Add(die);
 	}
+
+    private void RevertEditedDie() {
+        ChangeDieMaterial(diePreEditProperties.material);
+    }
 
     private void FinishEditDie() {
         diceboxLookpoint.Look(editTransitionTime);
@@ -96,5 +109,17 @@ public class Dicebox : MonoBehaviour
             dieBeingEdited.GetComponent<Collider>().enabled = true;
             dieBeingEdited.Activate();
         });
+    }
+
+/*  Private Classes
+ *  ==========================================================================*/
+/**
+ *  This is used to memorize die properties.  When cancelling, we invoke
+ *  these in order to revert the die back to its original state.
+ */
+    private class DieProperties {
+        public Material material;
+
+        public DieProperties() {}
     }
 }
