@@ -9,7 +9,9 @@ public class Dicebox : MonoBehaviour
     public GameObject D10Prefab;
 	public GameObject[] initialDice;
 
+    public float editTransitionTime = 500.0f;
 	public Lookpoint editMenuPoint;
+    public Waypoint dieFloatPoint;
 
 	public BoundedList<GameObject> Dice;
 
@@ -23,7 +25,9 @@ public class Dicebox : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        
+        if(inEditMode) {
+            dieFloatPoint.GoTo(dieBeingEdited.gameObject);
+        }
 	}
 
 /*  Public Methods
@@ -34,8 +38,7 @@ public class Dicebox : MonoBehaviour
 		if(Dice.Count < Dice.Capacity) {
 			GameObject newDie = Instantiate(D10Prefab, DieSpawnPoint.position, DieSpawnPoint.rotation) as GameObject;
 			newDie.transform.parent = DieSpawnPoint;
-			newDie.GetComponent<RollDice>().editMenuPoint = editMenuPoint;
-        //  newDie.GetComponent<RollDice>().camera = (Lookpointer) FindObjectOfType(typeof(Lookpointer));
+            newDie.GetComponent<RollDice>().dicebox = this;
 			Dice.Add(newDie);
 		}
     }
@@ -49,6 +52,22 @@ public class Dicebox : MonoBehaviour
             die.GetComponent<RollDice>().Roll();
         }
     }
+
+    public void EditDie(RollDice die) {
+        inEditMode = true;
+        dieBeingEdited = die;
+
+        editMenuPoint.Look(editTransitionTime);
+        dieFloatPoint.FlyTo(die.gameObject, editTransitionTime);
+        die.GetComponent<Rigidbody>().useGravity = false;
+        die.GetComponent<Collider>().enabled = false;
+        die.Deactivate();
+    }
+
+/*  Private Members
+ *  ==========================================================================*/
+    private bool inEditMode;
+    private RollDice dieBeingEdited;
 
 /*  Private Methods
  *  ==========================================================================*/

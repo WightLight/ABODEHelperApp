@@ -2,16 +2,19 @@
 using System.Collections;
 
 public class RollDice : Button {
-	public Lookpoint editMenuPoint;
-
-	public const float VERTICAL_ROLL_FACTOR = 2;
+    public const float VERTICAL_ROLL_FACTOR = 2;
 
 	public float maxRollForce = 100;
-    
+    public Dicebox dicebox;
+
+/*  Accessors
+ *  ==========================================================================*/
     public bool Rolling {
 		get {  return !rb.IsSleeping(); }
 	}
-    
+
+/*  Unity API
+ *  ==========================================================================*/
 	void Start () {
 		//dice = GetComponent<MyDice>();
 		rb = GetComponent<Rigidbody>();
@@ -19,17 +22,19 @@ public class RollDice : Button {
 			Roll();
 		};
 		longPress = delegate(Button b) {
-			editMenuPoint.FlyTo(500);
+            dicebox.EditDie(this);
 		};
 	}
 	
+/*  Public Methods
+ *  ==========================================================================*/
     public void Roll() {
-	 //   if(!Rolling) {
-			rb.AddForce(new Vector3(Random.Range(-maxRollForce, maxRollForce), VERTICAL_ROLL_FACTOR * maxRollForce, Random.Range(-maxRollForce, maxRollForce)));
-			rb.AddTorque(new Vector3(Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce)));
-	//	}
-	}
+        rb.AddForce(new Vector3(Random.Range(-maxRollForce, maxRollForce), VERTICAL_ROLL_FACTOR * maxRollForce, Random.Range(-maxRollForce, maxRollForce)));
+        rb.AddTorque(new Vector3(Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce)));
+    }
 
-	//private MyDice dice;
+/*  Private Members
+ *  ==========================================================================*/
 	private Rigidbody rb;
+
 }
