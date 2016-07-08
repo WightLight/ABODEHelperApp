@@ -76,7 +76,7 @@ public class BoundedList<T> : IEnumerable<T> {
  */
 	public void Remove(T obj) {
 		int i = 0;
-		while(i < Count && Object.ReferenceEquals(items[i], obj))
+		while(i < Count && !Object.ReferenceEquals(items[i], obj))
 			++i;
 		if(i < Count)
 			RemoveAt(i);
@@ -93,7 +93,7 @@ public class BoundedList<T> : IEnumerable<T> {
 			items[i] = items[i + 1];
 			++i;
 		}
-		items[count--] = default(T);
+		items[--count] = default(T);
 	}
 
 /*  IEnumerable Interface

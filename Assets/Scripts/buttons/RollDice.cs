@@ -7,6 +7,10 @@ public class RollDice : Button {
 	public float maxRollForce = 100;
     public Dicebox dicebox;
 
+//  @TODO refactor to be in its own MonoBehaviour?
+    public string label;
+    public int modifier = 0;
+
 /*  Accessors
  *  ==========================================================================*/
     public bool Rolling {
