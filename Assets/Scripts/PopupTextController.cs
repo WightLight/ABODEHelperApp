@@ -12,7 +12,7 @@ public class PopupTextController : MonoBehaviour
         if (!popupText) popupText = Resources.Load<PopupText>("Prefabs/Popup Text Parent");
     }
 
-    public static void CreatePopupText(string labelText, int rollText, Transform location)
+    public static void CreatePopupText(string labelText, int rollNumber, Transform location)
     {
         // Spawn a popup and place it on-screen where the caller is
         PopupText instance = Instantiate(popupText);
@@ -20,6 +20,6 @@ public class PopupTextController : MonoBehaviour
 
         instance.transform.SetParent(canvas.transform, false);
         instance.transform.position = screenPosition;
-        instance.SetText(labelText,rollText);
+        instance.SetText(labelText,rollNumber);
     }
 }

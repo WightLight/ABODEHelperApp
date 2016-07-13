@@ -25,10 +25,10 @@ public class PopupText : MonoBehaviour
         rollResultText = rollResultAnimator.GetComponent<Text>();
 	}
 	
-    public void SetText(string labelText, int rollText)
+    public void SetText(string labelText, int rollNumber)
     {
         // Rewrite the popup's texts
         dieLabelText.text = labelText;
-        rollResultText.text = rollText.ToString();
+        rollResultText.text = rollNumber.ToString();
     }
 }
