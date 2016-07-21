@@ -11,6 +11,8 @@ public class RollDice : Button {
     public string label;
     public int modifier = 0;
 
+	public DiceResultPopup resultPopupTemplate;
+
 /*  Accessors
  *  ==========================================================================*/
     public bool Rolling {
@@ -24,6 +26,13 @@ public class RollDice : Button {
 		rb = GetComponent<Rigidbody>();
 		release = delegate(Button b) {
 			Roll();
+			RectTransform rect = dicebox.diceResultCanvas.GetComponent<RectTransform>();
+			Vector2 viewportPosition = Camera.main.WorldToViewportPoint(this.transform.position);
+			Vector3 truePosition = new Vector3((viewportPosition.x * rect.sizeDelta.x) - (rect.sizeDelta.x * 0.5f), (viewportPosition.y * rect.sizeDelta.y) - (rect.sizeDelta.y * 0.5f), 0);
+			DiceResultPopup p = Popup.ShowNew<DiceResultPopup>(resultPopupTemplate, Camera.main.WorldToScreenPoint(this.transform.position), Quaternion.identity);
+			//p.GetComponent<RectTransform>().anchoredPosition = truePosition;
+			p.Canvas = dicebox.diceResultCanvas;
+			p.SetText("TEST", 7);
 		};
 		longPress = delegate(Button b) {
             dicebox.EditDie(this);

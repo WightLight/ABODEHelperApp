@@ -18,6 +18,8 @@ public class Dicebox : MonoBehaviour
     public InputField dieEditLabelField;
     public Slider dieEditModifierField;
 
+	public Canvas diceResultCanvas;
+
     public BoundedList<GameObject> Dice;  // NOTE: Another way of doing this is to have 10 dice blocks, but disable ones not being used
 
 /*  Unity API
