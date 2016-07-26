@@ -14,14 +14,19 @@ public class RollDice : Button {
 /*  Accessors
  *  ==========================================================================*/
     public bool Rolling {
-		get {  return !rb.IsSleeping(); }
+		get {  return GetComponent<Die>().rolling; }
 	}
+
+    public int Value {
+        get {  return GetComponent<Die>().value; }
+    }
 
 /*  Unity API
  *  ==========================================================================*/
 	void Start () {
 		//dice = GetComponent<MyDice>();
 		rb = GetComponent<Rigidbody>();
+        rolled = false;
 		release = delegate(Button b) {
 			Roll();
 		};
@@ -29,16 +34,26 @@ public class RollDice : Button {
             dicebox.EditDie(this);
 		};
 	}
+
+    void FixedUpdate() {
+        if(rolled && !Rolling) {
+            //PopupTextController.CreatePopupText(label, Value, transform);
+            PopupManager.instance.ShowPopupText(label, Value, transform.position);
+            rolled = false;
+        }
+    }
 	
 /*  Public Methods
  *  ==========================================================================*/
     public void Roll() {
         rb.AddForce(new Vector3(Random.Range(-maxRollForce, maxRollForce), VERTICAL_ROLL_FACTOR * maxRollForce, Random.Range(-maxRollForce, maxRollForce)));
         rb.AddTorque(new Vector3(Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce), Random.Range(-maxRollForce, maxRollForce)));
+        rolled = true;
     }
 
 /*  Private Members
  *  ==========================================================================*/
 	private Rigidbody rb;
+    private bool rolled;
 
 }
