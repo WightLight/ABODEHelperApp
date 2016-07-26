@@ -13,7 +13,7 @@ public class Popup : MonoBehaviour {
  *  ==========================================================================*/
 	public static T ShowNew<T>(T template, Vector3 position, Quaternion rotation) where T : Popup {
 		T newPopup = Instantiate(template, position, rotation) as T;
-		newPopup.Canvas = template.Canvas;
+		//newPopup.Canvas = template.Canvas;
 		newPopup.Open();
 		return newPopup;
 	}
@@ -44,5 +44,5 @@ public class Popup : MonoBehaviour {
 
 /*  Private Members
  *  ==========================================================================*/
-	private Canvas canvas;
+	public Canvas canvas;
 }

@@ -29,7 +29,6 @@ public class DiceResultPopup : Popup {
 	override public void Open() {
 		base.Open();
 		StartCloseTimer();
-		Debug.Log (this.enabled);
 	}
 
 	override public void Close() {
